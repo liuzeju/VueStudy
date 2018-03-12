@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--表单元素 input checkbox textarea radio select-->
+    <!--vue的指令 只是dom上的行间属性 vue给这些属性赋予一定的意义来实现特殊的功能 所有指令都以v-开头
+    value属性默认情况下会被vue忽略掉  selected、checked等都没有意义-->
+    <!--v-model会将msg的值会赋予输入框，输入框的值改变会影响数据-->
+    <div>{{msg}}</div>
+    <input type="text" v-model="msg">
+    <div v-text="msg"></div>
+    <div v-once>{{msg}}</div>
+
+    <div v-html="content"></div>
+
+    <div>{{person.name}}</div>
+    <!--使用变量时需要初始化，否则新加的属性不会导致页面刷新-->
+    <div>{{person.age}}</div>
+    <div>{{ arr }}</div>
+
+    <!--要循环谁就在谁身上加v-for属性(最好用in)-->
+    <ul>
+        <li v-for="(item,index) of fruits">{{ index+1 }}:{{ item.name }}</li>
+        <p>分割</p>
+        <li v-for="(item,index) in fruits">
+            {{index+1}}.{{ item.name }}
+            <ul>
+                <li v-for="(colorItem,colorIndex) in item.color">
+                    {{ index+1 }}.{{ colorIndex+1 }} {{ colorItem }}
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <!--如果不传递参数，则不用写括号会自动传入事件源,如果写括号则需要手动传入$event属性（事件源）-->
+    <div v-on:click="fn($event,11)">点击</div>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'Hello World',
+            content:'<h1>标题</h1>',
+            person:{
+                name:''
+            },
+            arr:[1,2,3,4,5],
+            fruits:[
+                {name:'香蕉',color:['green','yellow']},
+                {name:'橘子',color:['green','yellow']},
+                {name:'苹果',color:['green','yellow','red']}
+            ]
+        },
+        methods:{
+            fn(event,number){
+                console.log(event);
+                alert(number);
+            }
+        }
+    });
+    vm.$set(vm.person,'name','李四');//此方法可以给对象添加响应式的数据变化
+    vm.person = {name:'张三',age:11,address:'北京'};//替换成新对象
+
+    vm.arr[2] = 110;
+    vm.arr.length -= 2;
+    vm.arr.reverse();
+    vm.arr = [11,22,33,44];
+    vm.arr = vm.arr.map(function (item) {
+        return item*3;
+    })
+    vm.arr = vm.arr.map(item => item*5);
+</script>
+</body>
+</html>

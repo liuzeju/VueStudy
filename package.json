@@ -1,0 +1,25 @@
+{
+  "name": "VueStudy",
+  "version": "1.0.0",
+  "description": "this is a vue project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuzeju/VueStudy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liuzeju/VueStudy/issues"
+  },
+  "homepage": "https://github.com/liuzeju/VueStudy#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^4.0.0",
+    "vue": "^2.5.13"
+  }
+}

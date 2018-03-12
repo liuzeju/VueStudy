@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todo</title>
+</head>
+<body>
+    <div id="app">
+        <div>{{value}}</div>
+        <input type="text" @keyup.13="addList(value)" v-model="value">
+
+        <ul>
+            <li v-for="(value,index) in todoList" @click="deleteIndex(index)">
+                {{index+1}}.{{value}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+           el:'#app',
+           data:{
+               value:'fffss',
+               todoList:[]
+           },
+           methods:{
+               addList(value){
+                   console.log(value);
+                   this.todoList.unshift(value);
+                   this.value = '';
+               },
+               deleteIndex(index){
+                 this.todoList = this.todoList.filter((value,ind)=>{
+                     return index!==ind;
+                 })
+               },
+           }
+        });
+    </script>
+</body>
+</html>
